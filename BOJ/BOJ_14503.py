@@ -23,7 +23,6 @@ while True:
         #print(dx, dy, check)
         if 0 <= rx < n and 0 <= ry < m:
             if graph[rx][ry] == 0:
-
                 cnt += 1
                 graph[rx][ry] = 2
                 x, y = rx, ry
