@@ -7,30 +7,37 @@ INF = int(1e9)
 for _ in range(n-1):
     pi, qi, r = map(int, input().split())
     graph[pi].append((r, qi))
-    graph[pi].append((r, pi))
+    graph[qi].append((r, pi))
 
 res = []
 
 
 def dijkstra(start, k):
+    q = []
     cnt = 0
-    heapq.heappush(q, (0, start))
+    path = []
+    heapq.heappush(q, (k, start))
+    visited[start] = True
+    for i in graph[start]:
+        visited[i[1]] = True
+        q.append((i[0], i[1]))
     while q:
         cost, now = heapq.heappop(q)
-        for i in graph[now]:
-            if not visited[i[1]]:
-                if i[0] >= k:
-                    heapq.heappush(q, (i[1], i[0]))
+        if cost >= k:
+            cnt += 1
+            for i in graph[now]:
+                if not visited[i[1]]:
                     visited[i[1]] = True
-                    cnt += 1
-    return cnt
+                    q.append((min(cost, i[0]), i[1]))
+
+    return cnt-1
 
 
 for _ in range(q):
     k, v = map(int, input().split())
-    q = []
     visited = [False] * (n+1)
     ans = dijkstra(v, k)
     res.append(ans)
 
-print(res)
+for i in res:
+    print(i)
