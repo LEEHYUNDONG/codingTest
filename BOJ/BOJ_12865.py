@@ -1,14 +1,15 @@
 n, k = map(int, input().split())
-sack = [list(map(int, input().split())) for _ in range(n)]
-INF = -int(1e9)
+sack = [[0, 0]]
+for _ in range(1, n+1):
+    sack.append(list(map(int, input().split())))
+dp = [[0]*(k+1) for _ in range(n+1)]
 
-dp = [INF for _ in range(k+1)]
-dp[0] = 0
 
-for i in range(1, k+1):
-    for w, v in sack:
-        if i > w:
-            dp[i] = max(dp[i], dp[w]+dp[i-w])
+for i in range(1, n+1):
+    for j in range(1, k+1):
+        if j >= sack[i][0]:
+            dp[i][j] = max(dp[i-1][j], dp[i-1][j-sack[i][0]] + sack[i][1])
         else:
-            dp[w] = v
-print(dp[k])
+            dp[i][j] = dp[i-1][j]
+
+print(dp[-1][-1])
