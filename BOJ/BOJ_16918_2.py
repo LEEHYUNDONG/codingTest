@@ -34,7 +34,6 @@ def bomb():
 
 
 r, c, n = map(int, input().split())
-#data = [list(map(int, input().rstrip())) for _ in range(r)]
 for i in range(r):
     tmp = input().rstrip()
     data.append(list(tmp))
