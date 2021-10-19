@@ -27,3 +27,21 @@ while q:
 
 length = max(len(res), length)
 print(length)
+
+
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        length = 0
+        q = deque(list(s))
+        res = deque([])
+        while q:
+            tmp = q.popleft()
+            if tmp not in res:
+                res.append(tmp)
+            elif tmp in res:
+                length = max(len(res), length)
+                while tmp in res:
+                    res.popleft()
+                res.append(tmp)
+        length = max(len(res), length)
+        return length
