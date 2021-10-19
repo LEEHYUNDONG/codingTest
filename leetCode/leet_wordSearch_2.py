@@ -1,8 +1,3 @@
-r = 0
-c = 0
-visited = []
-
-
 class Solution:
     def exist(self, board: List[List[str]], word: str) -> bool:
         r = len(board)
