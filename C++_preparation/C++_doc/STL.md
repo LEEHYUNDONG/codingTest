@@ -15,6 +15,18 @@
 - 벡터의 크기를 리턴하는 함수인 size의 경우 리턴하는 값의 타입은 size_type 멤버 타입으로 정의되어 있다.
 - 맨 뒤에 원소를 추가하거나 제거하기 위해서는 push_back 혹은 pop_back 함수를 사용하면된다. 
 
+```c++
+vector<int> v; //비어있는 벡터 생성
+vector<int> v(5);
+vector<int> v(5, 2);
+
+v.assign(5, 2); // 2의 값으로 5개 원소 할당.
+v.front();
+v.back();
+v.clear();
+v.push_back(7);
+v.pop_back();
+```
 ## 🌳 deque
 `deque는 queue와 비슷하지만 queue는 front에서만 삭제가 가능하고, end에 삽입하는데 deque는 양방향으로 삽입, 삭제가 모두 가능하다.`
 - 연속적인 메모리를 기반으로 하는 순차 컨테이너
@@ -29,8 +41,8 @@ deque<int> dq(4); //0으로 초기화 된 4 개의 원소를 가진 deque를 생
 deque<int> dq = {1, 2, 3};
 deque<int> dq{1, 2, 3};
 ```
-### deque의 함수들
-#### Iterator
+### 🌳 deque의 함수들
+#### 👉 Iterator
 dq.begin(), dq.end()
 ```c++
 dq.assign(5) //원소 5개 0으로 초기화
@@ -49,3 +61,10 @@ dq.resize(10)
 dq.clear()
 dq.erase(v.begin()) //iterator가 가리키는 원소 삭제
 ```
+## 🌳 algorithm
+c++ 표준 라이브러리의 <algorithm> 라이브러리에는 원소들에 대해 작업할 수 있는 여러가지 함수(검색, 정렬, 원소 수정, 개수 세기 등등)들을 정의하고 있다. 이 때 작업할 원소들은 반복자 혹은 포인터를 통해 가리킬 수 있으며, 아래 함수들의 경우 작업을 시작할 원소와 작업을 끝낼 원소 바로 뒤를 인자로 받게 된다.
+
+### 🌳 원소를 수정하지 않는 작업들
+- all_of :범위 안에 모든 원소들이 조건을 만족하는지 확인
+- any_of :범위 안에 원소들 중 조건을 만족하는 원소가 있는지 확인.
+
