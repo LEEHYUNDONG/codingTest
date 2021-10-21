@@ -26,9 +26,9 @@ int main()
     //     cnt++;
     // }
     vector<string> v;
-    int numRows = 3;
+    int numRows = 1;
     int r = numRows;
-    string s = "PAYPALISHIRING";
+    string s = "AB";
     while (r != 0)
     {
         v.push_back("");
