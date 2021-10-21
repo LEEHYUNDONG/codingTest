@@ -41,7 +41,7 @@ deque<int> dq(4); //0으로 초기화 된 4 개의 원소를 가진 deque를 생
 deque<int> dq = {1, 2, 3};
 deque<int> dq{1, 2, 3};
 ```
-### 🌳 deque의 함수들
+## 👉 deque의 함수들
 #### 👉 Iterator
 dq.begin(), dq.end()
 ```c++
@@ -61,6 +61,7 @@ dq.resize(10)
 dq.clear()
 dq.erase(v.begin()) //iterator가 가리키는 원소 삭제
 ```
+---
 ## 🌳 algorithm
 c++ 표준 라이브러리의 <algorithm> 라이브러리에는 원소들에 대해 작업할 수 있는 여러가지 함수(검색, 정렬, 원소 수정, 개수 세기 등등)들을 정의하고 있다. 이 때 작업할 원소들은 반복자 혹은 포인터를 통해 가리킬 수 있으며, 아래 함수들의 경우 작업을 시작할 원소와 작업을 끝낼 원소 바로 뒤를 인자로 받게 된다.
 
@@ -68,7 +69,9 @@ c++ 표준 라이브러리의 <algorithm> 라이브러리에는 원소들에 대
 - all_of :범위 안에 모든 원소들이 조건을 만족하는지 확인
 - any_of :범위 안에 원소들 중 조건을 만족하는 원소가 있는지 확인.
 
-## 🙈 stringstream 사용법
+## 🌳 문자열 관련 함수 및 STL
+
+### 🙈 stringstream 사용법
 문자열을 나누는 stringstream c++에서 주어진 문자열에서 필요한 자료형에 맞는 정볼르 꺼낼 때 융요하게 사용된다. stringstream에서 공백과 '\n'을 제외하고 문자열에서 맞는 자료형의 정보를 빼낸다.
 
 `#include <sstream> 전처리 헤더를 포함 시킨다.`
@@ -84,4 +87,54 @@ while(stream1 >> num){
 }
 ```
 
+### 🙈 to_string 함수
+```c++
+string to_string(int num);
+string to_string(long num);
+string to_string(long long num);
+string to_string(unsigned num);
+string to_string(unsigned long num);
+string to_string(float num);
+string to_string(double num);
+string to_string(long double num);
+/*
+함수 설명
+숫자 타입의 데이터를 안전하게 스트링 타입으로 변경하도록하는 함수입니다.
+*/
+```
+### 🙈 std::stoi, std::stol, std::stoll
 
+```c++
+// stoi 함수
+int stoi(const std::string& str, std::size_t* pos = 0, int base = 10);
+int stoi(const std::wstring& str, std::size_t* pos = 0, int base = 10);
+// stol 함수
+long stol(const std::string& str, std::size_t* pos = 0, int base = 10);
+long stol(const std::wstring& str, std::size_t* pos = 0, int base = 10);
+// stoll 함수
+long long stoll(const std::string& str, std::size_t* pos = 0, int base = 10);
+long long stoll(const std::wstring& str, std::size_t* pos = 0, int base = 10);
+```
+string 또는 wstring 문자열 str을 base 진법을 사용하는 부호 있는 정수로 변환한 값을 리턴한다. 이때, 변환 과정에서 문자를 읽었는지는 Pos에 저장된다.
+이때 문자열을 정수로 해석할 때 다음의 과정에 따라 해석을 한다. 먼저 맨 앞에 붙어 있는 공백 문자들 (isspace() 호출 시 true인 애들)을 공백 문자가 아닌 문자가 나올 때 까지 무시한다. 그 뒤 base 진법이라 써진 것에 따라서 문자를 읽어들인다.
+
+#### ✌️ 인자
+- str :반환할 문자열
+- pos :문자열에서 문자 몇 개를 읽어들였는지 저장할 위치
+- base :정수 변환 시에 사용할 진법
+#### ✌️ 예외
+- 변환이 불가능 할 때, `std::invalid_argument`
+- 변환한 값이 정수 범위를 초과한다면 `std::out_of_range`
+---
+## 🌳 숫자관련 STL
+
+### c/c++ pow 함수 원형과 사용법
+`#include <cmath>를 포함시킨다.`
+
+#### ✌️ 함수 원형
+```c++
+double pow(double base, double n);
+float pow(float base, float n);
+long double pow(long double base, long double n);
+
+```
