@@ -68,3 +68,20 @@ c++ 표준 라이브러리의 <algorithm> 라이브러리에는 원소들에 대
 - all_of :범위 안에 모든 원소들이 조건을 만족하는지 확인
 - any_of :범위 안에 원소들 중 조건을 만족하는 원소가 있는지 확인.
 
+## 🙈 stringstream 사용법
+문자열을 나누는 stringstream c++에서 주어진 문자열에서 필요한 자료형에 맞는 정볼르 꺼낼 때 융요하게 사용된다. stringstream에서 공백과 '\n'을 제외하고 문자열에서 맞는 자료형의 정보를 빼낸다.
+
+`#include <sstream> 전처리 헤더를 포함 시킨다.`
+stream.str(string str)현재 stream의 값을 문자열 str로 변환시킨다.
+
+```c++
+int num;
+string str = "123 456";
+stringstream stream;
+stream.str(str);
+while(stream1 >> num){
+	cout << num << '\n';
+}
+```
+
+
