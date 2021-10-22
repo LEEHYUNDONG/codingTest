@@ -47,6 +47,7 @@ int main()
     cin >> s;
     bfs(s);
     cout << '\n';
+    cout << "thank u" << endl;
 
     return 0;
 }
