@@ -20,7 +20,7 @@ public:
 
             if (height[l] > height[r])
                 r--;
-            else`
+            else
                 l++;
         }
 
