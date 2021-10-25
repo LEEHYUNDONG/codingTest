@@ -1,6 +1,5 @@
 #include <iostream>
 #include <vector>
-#include <algorithm>
 using namespace std;
 
 int main()
@@ -8,9 +7,9 @@ int main()
     vector<pair<int, int> > v;
     int n;
     cin >> n;
-    int maxh = 0;
+    int maxh = INT_MIN;
     int ind = 0;
-
+    // vector<int> vi(1001);
     for (int i = 0; i < n; i++)
     {
         int x, y;
@@ -18,7 +17,7 @@ int main()
         v.push_back(make_pair(x, y));
     }
     sort(v.begin(), v.end());
-    vector<int> vi(1001);
+    vector<int> vi(v[n - 1].first);
 
     for (int i = 0; i < n; i++)
     {
