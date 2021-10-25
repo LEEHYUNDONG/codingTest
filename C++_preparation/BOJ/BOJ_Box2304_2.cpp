@@ -7,49 +7,42 @@ int main()
     vector<pair<int, int> > v;
     int n;
     cin >> n;
-    int maxH = INT_MIN;
+    int maxh = INT_MIN;
     int ind = 0;
+    // vector<int> vi(1001);
     for (int i = 0; i < n; i++)
     {
         int x, y;
         cin >> x >> y;
-        if (maxH < y)
-        {
-            ind = i;
-            maxH = y;
-        }
         v.push_back(make_pair(x, y));
     }
     sort(v.begin(), v.end());
-    int ans = 0;
-    int l = ind;
-    int tmp = ind;
-    int r = n - 1;
-    while (l >= 0)
-    {
-        l--;
-        if (v[l].second < maxH)
-        {
-            cout << v[l].first << " " << v[l].second << "\n";
+    vector<int> vi(v[n - 1].first);
 
-            ans += v[l].second * abs(v[ind].first - v[l].first);
-            maxH = v[l].second;
-            ind = l;
-        }
-        else
-        {
-        }
-    }
-    ind = tmp;
-    while (r--)
+    for (int i = 0; i < n; i++)
     {
-        if (v[r].second > maxH)
+        vi[v[i].first] = v[i].second;
+        if (v[i].second > maxh)
         {
-            ans += v[r].second * abs(v[ind].first - v[r].first);
-            maxH = v[r].second;
-            ind = r;
+            maxh = v[i].second;
+            ind = i;
         }
     }
+
+    int h = v[0].second;
+    int ans = 0;
+    for (int i = v[0].first; i < v[ind].first; i++)
+    {
+        h = max(h, vi[i]);
+        ans += h;
+    }
+    int rh = v[n - 1].second;
+    for (int i = v[n - 1].first; i > v[ind].first; i--)
+    {
+        h = max(h, vi[i]);
+        ans += h;
+    }
+    ans += maxh;
     cout << ans << "\n";
 
     return 0;
