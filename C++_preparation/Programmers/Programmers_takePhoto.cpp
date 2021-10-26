@@ -13,35 +13,21 @@ int flag = 1;
 int dfs(int depth, vector<string> data, char ch, int l){
     if(vec.size() == 8){
         int cnt = 0;
-        // if (flag == 1){
-        //     for(int i = 0;i < 8;i++)
-        //         cout << vec[i] << " ";
-        //     cout << "\n";
-        //     int x = find(vec.begin(), vec.end(), data[0][0]) - vec.begin();
-        //     int y = find(vec.begin(), vec.end(), data[0][2]) - vec.begin();
-        //     int dist = abs(x-y);
-        //     int redist = int(data[0][4])-'0';
-        //     cout << "x, y, disf, redist :" << x << " " << y << " " << dist << " " <<redist << '\n';
-        //     if(ans >5) flag = 0;
-        // }
         for(int k = 0;k < l;k++){
             int x = find(vec.begin(), vec.end(), data[k][0]) - vec.begin();
             int y = find(vec.begin(), vec.end(), data[k][2]) - vec.begin();
-            int dist = abs(x-y);
+            int dist = abs(x - y) - 1;
             int redist = int(data[k][4])-'0';
             if((data[k][3] == '=') && (dist == redist)){
                 cnt++;
-                continue;
             }else if((data[k][3] == '<') && (dist < redist)){
                 cnt++;
-                continue;
             }else if((data[k][3] == '>') && (dist > redist)){
                 cnt++;
-                continue;
             }
         }
         if(cnt == l){
-            ++ans;
+            ans++;
         }
         return 0;
     }
