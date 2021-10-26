@@ -27,6 +27,14 @@ v.clear();
 v.push_back(7);
 v.pop_back();
 ```
+### 🙈 벡터에서 값으로 인덱스 찾기
+- 찾고자 하는 값의 위치에 반복자를 만든다.
+- 벡터의 첫 번째 위치의 반복자(vec.begin())와 위에서 만든 반복자 사이의 거리를 이용하여 index를 구한다.
+
+```c++
+
+```
+
 ## 🌳 deque
 `deque는 queue와 비슷하지만 queue는 front에서만 삭제가 가능하고, end에 삽입하는데 deque는 양방향으로 삽입, 삭제가 모두 가능하다.`
 - 연속적인 메모리를 기반으로 하는 순차 컨테이너
@@ -137,4 +145,47 @@ double pow(double base, double n);
 float pow(float base, float n);
 long double pow(long double base, long double n);
 
+```
+
+## 🌳 Algorithm Stl
+
+### next_permutation
+수학적으로 순열이란 서로 다른 n개에서 r개를 뽑아 한 줄로 세우는 경우의 수를 말합니다. 원소를 한 줄로 세우기 때문에 원소의 조합이 같더라도 순서가 다른면 다른 방법으로 본다.
+
+```c++
+bool next_permutation(BidirectionalIterator first, BidirectionalIterator last);
+
+bool next_permutation(BidirectionalIterator first, BidirectionalIterator last, Compare comp);
+
+```
+next_permutations은 순열을 구할 컨테이너의 시작과 끝 iterator를 인자로 받습니다. 만약 해당 컨테이너에 다음 순열이 존재하면 그 컨테이너의 원소를 해당 순열로 순서를 바꾸고 True를 반환하고, 다음 순열이 없다면 false를 반환한다.
+
+- 오름차순으로 정렬된 값을 가진 컨테이너로만 사용가능하다.
+- default로 Operator < 를 사용해 순열을 생성한다. 즉 오름차순으로 순열을 생성한다.
+- 중복이 있는 원소들은 중복을 제외하고 순열을 만들어준다.
+
+```c++
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+int main()
+{
+
+    string s = "ABEFDES";
+
+    do
+    {
+        for (char a : s)
+        {
+            cout << a << " ";
+        }
+        cout << endl;
+
+    } while (next_permutation(s.begin(), s.end()));
+    return 0;
+}
 ```
