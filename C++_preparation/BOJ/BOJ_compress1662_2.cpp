@@ -10,7 +10,6 @@ int main()
     string s;
     cin >> s;
     stack<string> st;
-    int i = 0;
     stringstream word;
     int cnt = 0;
     for (int i = 0; i < s.length(); i++)
@@ -35,31 +34,37 @@ int main()
             string tmp = to_string(i);
             st.push(tmp);
         }
+        int flag = 0;
+        ans = st.top();
+        st.pop();
         while (!st.empty())
         {
             string tmp;
             tmp = st.top();
             st.pop();
-            if (tmp.length() <= 1)
+            string tmp2 = "";
+            string tmp3 = "";
+            int x = int(tmp[tmp.length() - 1]) - '0';
+            if (x == 0)
             {
-                ans += tmp;
+                cout << "0" << endl;
+                flag = 1;
+                break;
             }
-            else
+            for (i = 0; i < x; i++)
             {
-                int x = int(tmp[tmp.length() - 1]);
-                string tmp2 = "";
-
+                tmp3 += ans;
+            }
                 for (int i = 0; i < tmp.length() - 1; i++)
                 {
                     tmp2 += tmp[i];
                 }
-                for (i = 0; i < x; i++)
-                {
-                    ans += tmp2;
-                }
-            }
+
+                ans = "";
+                ans += tmp3 + tmp2;
         }
-        cout << ans.length() << endl;
+        if (flag == 0)
+            cout << ans.length() << endl;
     }
 
     return 0;
