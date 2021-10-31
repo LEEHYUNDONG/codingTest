@@ -1,11 +1,8 @@
 #include <string>
-#include <vector>
 #include <queue>
-#include <deque>
-
 using namespace std;
 
-bool checkBracket(string p)
+bool check(string p)
 {
     queue<char> b;
     for (int i = 0; i < p.length(); i++)
@@ -16,62 +13,42 @@ bool checkBracket(string p)
         }
         else if (p[i] == ')')
         {
-            if (b.empty())
-                return false;
             if (!b.empty() && b.front() == '(')
-            {
                 b.pop();
-            }
+            else
+                return false;
         }
     }
     return true;
 }
-string make(string s, string u, string v)
-{
-    if (s == "")
-        return "";
-    string u = "";
-    string v = "";
-    deque<char> b;
-    for (int i = 0; i < s.length(); i++)
-    {
-        if (s[i] == '(')
-        {
-            if (b.empty())
-            {
-                u += s[i];
-                b.push_back(s[i]);
-            }
-            else if (!b.empty())
-        }
-        else if (s[i] == ')')
-            if (!b.empty() && b.front() == '(')
-            {
-                u += s[i];
-                b.pop_front();
-            }
-            else
-            {
-                v += s[i];
-            }
-    }
-}
 string solution(string p)
 {
-    string answer = "";
-    // 올바른  문자열 리턴
-    if (checkBracket(p))
+    if (p == "")
         return p;
 
-    string u = p;
-    string v = "";
-    // deque<char> tmp;
-    for (int i = 0; i < p.length(); i++)
+    int cnt = 0;
+    string u, v;
+
+    for (int i = 0; i < p.size(); i++)
     {
-        if (p[i] == ')')
+        if (p[i] == '(')
+            cnt++;
+        else
+            cnt--;
+        if (cnt == 0)
         {
-            tmp.push_back(p[i]);
+            u = p.substr(0, i + 1);
+            v = p.substr(i + 1);
+            break;
         }
     }
-    return answer;
+
+    if (check(u))
+        return u + solution(v);
+
+    string ret = "(" + solution(v) + ")";
+    for (int i = 1; i < u.size() - 1; i++)
+        ret += (u[i] == '(' ? ")" : "(");
+
+    return ret;
 }
