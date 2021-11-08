@@ -29,6 +29,7 @@ int main()
         string ans = "";
         word.str(s);
         int r;
+        int i;
         while (word >> i)
         {
             string tmp = to_string(i);
@@ -51,7 +52,7 @@ int main()
                 flag = 1;
                 break;
             }
-            for (i = 0; i < x; i++)
+            for (int i = 0; i < x; i++)
             {
                 tmp3 += ans;
             }
