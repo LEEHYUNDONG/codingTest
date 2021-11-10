@@ -1,36 +1,27 @@
 #include <iostream>
 #include <vector>
 #include <memory.h>
-#include <ordered_set>
+#include <algorithm>
 
 using namespace std;
 int l[50];
-bool visited[50];
+int ans[13];
 int t;
 vector<int> tmp;
-int cnt = 0;
 
-void dfs(int i, int depth)
+void dfs(int start, int depth)
 {
-    if (tmp.size() == 6)
+    if (depth == 6)
     {
-        for (auto a : tmp)
-            cout << a << " ";
-
-        cnt++;
+        for (int i = 0; i < 6; i++)
+            cout << ans[i] << ' ';
         cout << endl;
         return;
     }
-    for (int j = 0; j < t; j++)
+    for (int j = start; j < t; j++)
     {
-        if (!visited[j] && depth < 6)
-        {
-            visited[j] = true;
-            tmp.push_back(l[j]);
-            dfs(j, depth + 1);
-            tmp.pop_back();
-            visited[j] = false;
-        }
+        ans[depth] = l[j];
+        dfs(j + 1, depth + 1);
     }
 }
 int main()
@@ -44,9 +35,8 @@ int main()
         {
             cin >> l[i];
         }
-        memset(visited, false, sizeof(visited));
         dfs(0, 0);
-        cout << "cnt :" << cnt << '\n';
+        cout << '\n';
     }
     return 0;
 }
