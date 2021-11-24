@@ -22,7 +22,7 @@ int babySize = 2;
 int toEat = 2;
 int resSec = 0;
 
-vector<pair<pair<int, int>, int> > fishVec; //거리, 가장 위쪽, 가장 왼쪽
+vector<pair<int, pair<int, int> > > fishVec; //거리, 가장 위쪽, 가장 왼쪽
 
 void BFS(int row, int col)
 { //현재 위치에서 먹을 수 있는 물고기까지의 거리와 위치 저장
@@ -63,7 +63,7 @@ void BFS(int row, int col)
                 if (minDist >= fromStart[nr][nc])
                 {
                     minDist = fromStart[nr][nc];
-                    fishVec.push_back(make_pair(make_pair(minDist, nr), nc));
+                    fishVec.push_back(make_pair(minDist, make_pair(nr, nc)));
 
                     // cout << nr << " " << nc << "  거리 : " << minDist << "\n";
                 }
@@ -104,7 +104,7 @@ int main()
 
             sort(fishVec.begin(), fishVec.end()); //거리 같은 물고기들 중 위/ 왼 우선순위 적용해서 정렬 후 가장 앞의 요소 먹기
 
-            resSec += fishVec[0].first.first; //이동거리 = 걸린 초
+            resSec += fishVec[0].first; //이동거리 = 걸린 초
 
             //잡아 먹음
             toEat -= 1;
@@ -115,8 +115,8 @@ int main()
             }
 
             //잡아먹었으니 아기상어 위치 바뀜
-            nowR = fishVec[0].first.second;
-            nowC = fishVec[0].second;
+            nowR = fishVec[0].second.first;
+            nowC = fishVec[0].second.second;
 
             map[nowR][nowC] = 0; //해당 칸 물고기 없어져서 빈칸됨
         }
