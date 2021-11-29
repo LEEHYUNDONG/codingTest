@@ -18,7 +18,6 @@ void project(int x, int y, int size)
                 project(x, y + size / 2, size / 2);
                 project(x + size / 2, y, size / 2);
                 project(x + size / 2, y + size / 2, size / 2);
-
                 ans += ')';
                 return;
             }
