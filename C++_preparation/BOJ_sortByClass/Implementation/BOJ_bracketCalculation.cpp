@@ -8,24 +8,63 @@ int main()
 {
     string b;
     stack<char> st;
-    stack<int> answer;
+    stack<int> num;
     cin >> b;
-    int ans = 1;
+    int tot = 0;
+
     for (int i = 0; i < b.length(); i++)
     {
         if (b[i] == '(')
         {
-            ans *= 2;
             st.push(b[i]);
+            if (num.empty() || num.top() != 1)
+                num.push(1);
         }
         else if (b[i] == '[')
         {
-            ans *= 3;
             st.push(b[i]);
+            if (num.empty() || num.top() != 1)
+                num.push(1);
         }
-        else if (b[i] == ')' && st.top() == '(')
+        else if (!st.empty() && b[i] == ')' && st.top() == '(')
         {
+            st.pop();
+            int tmp = num.top();
+            num.pop();
+            num.push(2 * tmp);
+        }
+        else if (!st.empty() && b[i] == ']' && st.top() == '[')
+        {
+
+            st.pop();
+            int tmp = num.top();
+            num.pop();
+            num.push(3 * tmp);
+        }
+        else
+        {
+            while (!num.empty())
+                num.pop();
+            break;
         }
     }
+    if (num.empty())
+    {
+        cout << 0 << '\n';
+    }
+    else
+    {
+        while (!num.empty())
+        {
+            cout << num.top() << '\n';
+            tot += num.top();
+            num.pop();
+        }
+        if (tot == 1)
+            cout << tot - 1 << '\n';
+        else
+            cout << tot << '\n';
+    }
+
     return 0;
 }
