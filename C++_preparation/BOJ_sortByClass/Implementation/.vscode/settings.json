@@ -1,0 +1,7 @@
+{
+    "terminal.external.osxExec": "iTerm2.app",
+    "files.associations": {
+        "stack": "cpp"
+    }
+
+}

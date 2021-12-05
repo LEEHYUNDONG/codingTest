@@ -1,0 +1,1 @@
+cout << arr[k] - arr[n - 1] << '\n';
