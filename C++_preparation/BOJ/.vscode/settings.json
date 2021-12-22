@@ -1,6 +1,10 @@
 {
     "files.associations": {
-        "utility": "cpp"
+        "utility": "cpp",
+        "memory": "cpp",
+        "vector": "cpp",
+        "queue": "cpp",
+        "string": "cpp"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }
