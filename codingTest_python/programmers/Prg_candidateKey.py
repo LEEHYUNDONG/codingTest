@@ -1,39 +1,29 @@
 from itertools import combinations
 
-def unique(relation, n):
-    tmp =[''] * len(relation)
-    for i in range(n):
-        for j in range(len(relation)):
-            tmp[j] += ' ' + relation[j][i]
-            
 
- 
 def solution(relation):
-    answer = 0
-    print(len(relation))
-    print(len(relation[0]))
-    num = [i for i in range(len(relation[0]))]
-    #for x, y in combinations(num, 2):
-    #print(list(zip(*relation))[1])
+    row = len(relation)
+    col = len(relation[0])
 
- 
+    #가능한 속성의 모든 인덱스 조합
+    combi = []
+    for i in range(1, col+1):
+        combi.extend(combinations(range(col), i))
 
-    return answer
+    #유일성
+    unique = []
+    for i in combi:
+        tmp = [tuple([item[key] for key in i]) for item in relation]
 
+        if len(set(tmp)) == row:    # 유일성
+            put = True
 
-test = [["100","ryan","music","2"],["200","apeach","math","2"],["300","tube","computer","3"],
-    ["400","con","computer","4"],["500","muzi","music","3"],["600","apeach","music","2"]]
-print(solution(test))
+            for x in unique:
+                if set(x).issubset(set(i)):  # 최소성
+                    put = False
+                    break
 
+            if put:
+                unique.append(i)
 
-   # for i in range(1, 3):
-    #     sample = combinations(num, i)
-    #     if i == 1:
-    #         for j in sample:
-    #             if check(list(zip(*relation))[j[0]]):
-    #                 answer += 1
-    #     if i == 2:
-    #         for j in sample:
-    #             if check( list(zip(*relation))[j[0]], zip(*relation[j[1]])):
-    #                 answer += 1
-        
+    return len(unique)
