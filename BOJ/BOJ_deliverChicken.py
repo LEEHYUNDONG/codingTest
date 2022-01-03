@@ -25,6 +25,7 @@ for i in combinations(chicken, m):
     tot = 0
     dist = []
     for j in house:
+        # 이부분에서 치킨집 중에서 한ㄴ 집까지 거리 중에서 최소가 되는 값을 찾음
         tot += min([abs(ch[0] - j[0]) + abs(ch[1]-j[1]) for ch in i])
         if minv <= tot:
             break
