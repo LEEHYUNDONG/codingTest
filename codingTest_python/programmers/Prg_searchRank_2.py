@@ -4,8 +4,11 @@ from itertools import combinations
 
 def make_cases(sep_info):
     cases = []
+    # 모든 경우를 만들어 주는 함수
     for k in range(5):
+        # 인덱스 0-3까지 조합을 이용해서 -가 들어가야할 인덱스를 찾고
         for condition in combinations([0, 1, 2, 3], k):
+            # 해달 배열을 문자열로 바꿔 키값을 만들어서 딕셔너리 값으로 넣어준다
             case = []
             for idx in range(4):
                 if idx not in condition:
