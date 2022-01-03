@@ -44,7 +44,7 @@ def solution(info, query):
 
         if target in all_people.keys():
             answer.append(len(all_people[target]) - bisect_left(
-                all_people[target], int(seperate_q[4]), lo=0, hi=len(all_people[target])))
+                all_people[target], int(seperate_q[4])))
         else:
             answer.append(0)
     return answer
