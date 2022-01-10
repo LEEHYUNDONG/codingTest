@@ -38,9 +38,9 @@ def solution(info, query):
         seperate_q = q.split(' and ')
         seperate_q.extend(seperate_q.pop().split())
         print(seperate_q)
-        target = ''
-        for sq in seperate_q[:4]:
-            target += sq
+        target = ''.join(seperate_q[:4])
+        # for sq in seperate_q[:4]:
+        #     target += sq
 
         if target in all_people.keys():
             answer.append(len(all_people[target]) - bisect_left(
