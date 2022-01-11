@@ -25,7 +25,7 @@ def calc(sorted_info, a, b, c, d, e):
         cnt = len(sorted_info[a][b][c][d]) - index
 
     return cnt
-
+# "LLLLRLRLRLL" 5, "UUUUDUDUDUUU" 5
 
 def solution(info, query):
     answer = []
