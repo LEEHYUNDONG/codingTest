@@ -20,13 +20,13 @@ for i in range(k):
     # 동
     if toward == 0:
         dice[0], dice[2], dice[3], dice[5] = dice[3], dice[0], dice[5], dice[2]
-    # 서
+    # 서 
     elif toward == 1:
         dice[0], dice[2], dice[3], dice[5] = dice[2], dice[5], dice[0], dice[3]
-    # 북
+    # 북 바닥이 북이되고 위가 남이됨
     elif toward == 2:
         dice[0], dice[1], dice[4], dice[5] = dice[4], dice[0], dice[5], dice[1]
-    # 남
+    # 남 주사위는 바닥이 남이되고 위가 남의 반대편인 북이 되는 것
     elif toward == 3:
         dice[0], dice[1], dice[4], dice[5] = dice[1], dice[5], dice[0], dice[4]
     
