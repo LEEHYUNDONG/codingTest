@@ -12,10 +12,8 @@ def solution(m, musicinfos):
         mm, song, duration = info[3], info[2], end_time-start_time
         played = ''
         mm = translate_mel(mm)
-        if len(mm) >= duration:
-            played = mm[:duration]
-        else:
-            played = mm * (duration // len(mm)) + mm[:(duration % len(mm))]
+
+        played = mm * (duration // len(mm)) + mm[:(duration % len(mm))]
         ml = played
         m = translate_mel(m)
 
