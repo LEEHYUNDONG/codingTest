@@ -15,7 +15,7 @@ def zipQuad(arr, visited, x, y, size):
         for i in range(x, x+size):
             for j in range(y, y+size):
                 visited[i][j] = True
-        ans[color] += 1
+        ans[color] += 1 
 
     return
 
