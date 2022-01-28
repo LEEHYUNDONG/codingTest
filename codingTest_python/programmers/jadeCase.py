@@ -17,7 +17,6 @@
 #                 answer += s[i]
 #             else:
 #                 answer += s[i]
-
 #     return answer
 
 def solution(s):
