@@ -41,14 +41,12 @@ while q:
         hdx, hdy = hx+i[1][0], hy+i[1][1]
         tdx, tdy = tx+i[0][0], ty+i[0][1]
         if inRange(hdx, hdy) and inRange(tdx, tdy):
+            newshape = pipeLaid([tdx, tdy], [hdx, hdy])
+            if newshape == 2 and graph[hdx-1][hdy] == 1 or graph[hdx][hdy-1] == 1:
+                continue
             if graph[hdx][hdy] == 1 or graph[tdx][tdy] == 1:
                 continue
             if graph[hdx][hdy] == 0 and graph[tdx][tdy] == 0:
-                newshape = pipeLaid([tdx, tdy], [hdx, hdy])
-                if newshape == 2:
-                    if graph[hdx-1][hdy] == 1 or graph[hdx][hdy-1] == 1:
-                        continue
                 q.append([[hdx, hdy], [tdx, tdy]])
 
-    
 print(answer)    
