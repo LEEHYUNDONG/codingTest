@@ -15,7 +15,8 @@ def solution(n, t, m, timetable):
             people += 1 
             cnt += 1 
             # 버스에 자리가 남았을 경우 
-        if cnt < m:
+        if cnt < m: 
+            shuttle = ttime 
             # 버스에 자리가 없는 경우 맨 마지막 크루보다 1분 먼저 도착 
         else: 
             shuttle = timet[people - 1] - 1 
