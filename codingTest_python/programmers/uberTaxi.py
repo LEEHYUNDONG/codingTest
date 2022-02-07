@@ -30,10 +30,6 @@ def solution(n, s, a, b, fares):
         dijkstra(i)
         
     for i in range(1, n+1):
-        if i == s:
-            continue
-        # print(distance[s][i], distance[i][a], distance[i][b])
         answer = min(answer, distance[i][a]+distance[s][i]+distance[i][b])
-        answer = min(distance[s][a]+distance[s][b], answer)
                 
     return answer
