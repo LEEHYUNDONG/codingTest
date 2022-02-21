@@ -23,3 +23,4 @@ def dfs(x, y, target):
     return visited[x][y]
 
 print(dfs(0, 0, graph[0][0]))
+print(visited)
