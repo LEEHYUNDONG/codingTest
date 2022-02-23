@@ -12,10 +12,10 @@ def bfs(start, u, d, g, f):
         x = q.popleft()
         if x == g:
             return visited[x]
-        if x+u <= f and visited[x+u] == -1 and u!=0:
+        if x+u <= f and visited[x+u] == -1:
             q.append(x+u)
             visited[x+u] = visited[x]+1
-        if 1<=x-d and visited[x-d] == -1 and d!=0:
+        if 1<=x-d and visited[x-d] == -1:
             q.append(x-d)
             visited[x-d] = visited[x]+1
 
