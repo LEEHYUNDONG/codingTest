@@ -8,20 +8,18 @@ direction = [(0, 1, 0), (0, -1, 0), (0, 0, 1), (0, 0, -1), (1, 0, 0), (-1, 0, 0)
 
 def bfs(graph, start):
     q = deque([start]) # level = z, x, y, cnt
-    # visited = [[[False] * C]*R for _ in range(L)]
-    tmp = copy.deepcopy(graph)
+    visited = [[[-1 for _ in range(C)] for _ in range(R)] for _ in range(L)]
+    visited[start[0]][start[1]][start[2]] = 0
     while q:
-        z, y, x, cnt = q.popleft()
-        if graph[z][y][x] == 'E':
-            return cnt
-        for rz, ry, rx in direction:
+        z, x, y = q.popleft()
+        for rz, rx, ry in direction:
             dz, dy, dx = z + rz, y + ry, x + rx
-            if 0 <= dz < L and 0 <= dx < C and 0 <= dy < R:
-                # if not visited[dz][dy][dx] and tmp[dz][dy][dx]!='#':
-                if tmp[dz][dy][dx]!='#':
-                    q.append([dz, dy, dx, cnt+1])
-                    # visited[dz][dy][dx] = True
-    # print()
+            if 0 <= dz < L and 0 <= dx < R and 0 <= dy < C:
+                if graph[dz][dx][dy] == 'E':
+                    return visited[z][x][y] +1
+                if visited[dz][dx][dy] == -1 and graph[dz][dx][dy] == '.':
+                    visited[dz][dx][dy] = visited[z][x][y] + 1
+                    q.append([dz, dx, dy])
     return None    
 
 ans = []
@@ -29,25 +27,21 @@ while True:
     L, R, C = map(int, input().split())
     if L== 0 and R == 0 and C == 0:
         break
-    graph = []
-    i = 0
-    start = []
-    while i < L:
-        graph.append([])
-        for j in range(R+1):
-            tmp = list(input().rstrip())
-            if tmp == []:
-                continue
+    graph = [[[]*C for _ in range(R)] for _ in range(L)]
+    for i in range(L):
+        graph[i] = [list(input()) for _ in range(R)]
+        input()
+    for i in range(L):
+        for j in range(R):
             for k in range(C):
-                if tmp[k] == 'S':
-                    start = [k, j, i, 0]
-            graph[i].append(tmp)
-        i+= 1
-    res = bfs(graph, start)
-    if res == None:
-        ans.append("Trapped!")
-    else:
-        ans.append("Escaped in "+str(res)+ " minute(s).")
+                if graph[i][j][k] == 'S':
+                    res = bfs(graph, [i, j, k])
+                    if res == None:
+                        ans.append("Trapped!")
+                    else:
+                        ans.append("Escaped in "+str(res)+ " minute(s).")
+                    break
+
 
 for i in ans:
     print(i)
