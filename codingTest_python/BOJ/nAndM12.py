@@ -10,7 +10,6 @@ ans = set()
 def dfs(idx, tmp, depth):
     global ans
     if depth == m:        
-        
         ans.add(tuple(tmp))
         return
     
