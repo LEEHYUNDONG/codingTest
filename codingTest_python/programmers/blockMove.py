@@ -13,6 +13,7 @@ def solution(board):
 
     visited[0][0][0] = 0
     visited[0][0][1] = 0
+    
     while q:
         head, tail, mode, cnt = q.popleft()  # mode 0 가로, mode 1 세로
         hx, hy = head
