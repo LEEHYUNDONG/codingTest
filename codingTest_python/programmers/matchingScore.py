@@ -7,29 +7,19 @@ def solution(word, pages):
         s = ''
         link = ''
         cnt = 0
-        for j in range(len(pages[i])-17):
-            if "content=\"https://" == pages[i][j:j+17]:
-                idx = j+17
-                while pages[i][idx] != "\"":
-                    s += pages[i][idx]
-                    idx += 1
-                pageInx.append([s, i])
-                page[s] = []
-                if s not in res.keys():
-                    res[s] = [0, 0, 0, 0]
-
-            if "<a href=\"https://" == pages[i][j:j+17]:
-                idx = j+17
-                while pages[i][idx] != "\"":
-                    link += pages[i][idx]
-                    idx += 1
-                page[s].append(link)
-                res[s][1] += 1
-                link = ''
-
+        pag = pages[i].split('<meta property=\"og:url\" content=\"')[1].split('\"')[0]
+        page[pag] = []
+        for link_long in page.split('a href=\"')[1:]:
+            tmp = link_long.split('\"')
+            page[pag].append(tmp)
+            if pag not in res.keys():
+                res[tmp] = [0, 1, 0, 0]
+            else:
+                res[tmp][1] += 1
+        pageInx.append([pag, i])
             # 기본 점수
-            if word.lower() == pages[i][j:j+len(word)].lower() and not pages[i][j-1].isalpha() and not pages[i][j+len(word)].isalpha():
-                res[s][0] += 1
+        if word.lower() == pages[i][j:j+len(word)].lower() and not pages[i][j-1].isalpha() and not pages[i][j+len(word)].isalpha():
+            res[s][0] += 1
 
         # print(page)
 
@@ -54,3 +44,4 @@ def solution(word, pages):
 
     ans.sort()
     return ans[0]
+
