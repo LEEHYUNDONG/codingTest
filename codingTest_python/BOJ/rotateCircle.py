@@ -48,6 +48,8 @@ def noAdj(arr, n, m):
             if arr[i][j] != 0:
                 cnt += 1
                 tot += arr[i][j]
+    if cnt == 0:
+        return True
     avg = tot / cnt
     # print(avg, tot, cnt)
     for i in range(n):
@@ -57,7 +59,7 @@ def noAdj(arr, n, m):
                     arr[i][j] -= 1
                 elif arr[i][j] < avg:
                     arr[i][j] += 1
-
+    return False
 
 for x, d, k in test:
     for i in range(n):
@@ -67,7 +69,8 @@ for x, d, k in test:
     res = findAdj(arr, n, m)
     # print("res :", res)
     if not res:
-        noAdj(arr, n, m)
+        if noAdj(arr, n, m):
+            break
     
     # for i in range(n):
     #     print(*arr[i])
