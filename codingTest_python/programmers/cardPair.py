@@ -1,7 +1,7 @@
 from collections import deque
 import copy
 
-
+# 다시 풀어보기
 def solution(board, r, c):
     answer = 0
     directions = [(1, 0), (-1, 0), (0, 1), (0, -1)]  # 4가지 키 방향
