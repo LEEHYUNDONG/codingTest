@@ -8,56 +8,49 @@ directions = [
 
 def moveBy(lst):
     q = deque(lst)
-    tmp = []
-    visited = [[[0 for _ in range(N)] for _ in range(N)] for _ in range(4)]
+    visited = [[[] for _ in range(N)] for _ in range(N)]
+
     for _ in range(len(q)):
         x, y, m, s, d = q.popleft()
-        if m == 0:
-            continue
         rx, ry = x, y
         for _ in range(s):
             rx += directions[d][0]
             ry += directions[d][1]
         rx %= N
         ry %= N
-        if [rx, ry] not in tmp:
-            tmp.append([rx, ry])
-        if ((visited[2][rx][ry] % 2 == 1 or visited[0][rx][ry] == 0) and d % 2 == 1) or (visited[2][rx][ry] % 2 == 0 and d % 2 == 0):
-            visited[2][rx][ry] = 1
-        else:
-            visited[2][rx][ry] = 0
-        visited[2][rx][ry] += d 
-        visited[0][rx][ry] += m
-        visited[1][rx][ry] += s
-        visited[3][rx][ry] += 1
+        visited[rx][ry].append([m, s, d])
 
-    return visited, tmp
+    return visited
 
 def fireBurst(lst):
-    visited, lst = moveBy(lst)
-    ttmp = []
+    visited = moveBy(lst)
+    attack = []
     value = 0
 
-    for i in range(len(lst)):
-        rx, ry = lst[i]
-        if visited[0][rx][ry]//5 == 0:
-            continue
-        if visited[3][rx][ry] <= 1:
-            value += visited[0][rx][ry]
-            ttmp.append([rx, ry, visited[0][rx][ry], visited[1][rx][ry], visited[2][rx][ry]])
-            continue
+    for i in range(N):
+        for j in range(N):
+            if len(visited[i][j]) > 1:
+                M, S, ocnt, ecnt, cnt = 0, 0, 0, 0, len(visited[i][j])
+                while visited[i][j]:
+                    tmp = visited[i][j].pop(0)
+                    M += tmp[0]
+                    S += tmp[1]
+                    if tmp[2] % 2:
+                        ocnt += 1
+                    else:
+                        ecnt += 1
+                if ocnt == cnt or ecnt == cnt:
+                    if M // 5:
+                        for k in range(4):
+                            attack.append([i, j, M//5, S//cnt, 2*k])
+                else:
+                    if M // 5:
+                        for k in range(4):
+                            attack.append([i, j, M//5, S//cnt, 2*k+1])
+            if len(visited[i][j]) == 1:
+                attack.append([i, j] + visited[i][j].pop())
 
-        if visited[2][rx][ry] % 2:
-            for i in range(4):
-                ttmp.append([rx, ry, visited[0][rx][ry]//5, visited[1][rx][ry] // visited[3][rx][ry], 2*i])
-        else:
-            for i in range(4):
-                ttmp.append([rx, ry, visited[0][rx][ry]//5, visited[1][rx][ry] // visited[3][rx][ry], 2*i+1])
-            value += 4*(visited[0][rx][ry]//5)
-    # print(ttmp)
-    # for i in range(N):
-    #     print(*visited[0][i])
-    return ttmp, value
+    return attack
 
 
 N, M, K = map(int, input().split())
@@ -66,6 +59,6 @@ ans = 0
 
 
 for _ in range(K):
-    attack, ans = fireBurst(attack)
+    attack = fireBurst(attack)
 
-print(ans)
+print(sum([i[2] for i in attack]))
