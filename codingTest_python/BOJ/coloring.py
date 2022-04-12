@@ -3,17 +3,12 @@ from collections import deque
 
 input = sys.stdin.readline
 
-def bfs(graph, N):
+def bfs(graph, start, N):
     q = deque([])
-    x = 0
-    for i in range(1, N+1):
-        if len(graph[i]):
-            x = i
-            break
-    
-    q.append(x)
+
+    q.append(start)
     visited = [0]*(N+1)
-    visited[x] = 1
+    visited[start] = 1
     
     while q:
         x = q.popleft()
@@ -29,11 +24,13 @@ T = int(input())
 for _ in range(T):
     N, M = map(int, input().split())
     graph = [[] for _ in range(N+1)]
+    start = 0
     for _ in range(M):
         a, b = map(int, input().split())
         graph[a].append(b)
         graph[b].append(a)
-    if bfs(graph, N):
+        start = a
+    if bfs(graph, start, N):
         print("possible")
     else:
         print("impossible")
