@@ -23,3 +23,4 @@ res.sort(key = lambda x:x[-1], reverse=True)
 res.sort(key = lambda x:x[0][1])
 
 ans = [res[0][0], res[0][1]]
+
