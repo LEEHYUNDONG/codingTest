@@ -8,18 +8,18 @@ import sys
 from itertools import combinations
 import copy
 
+#
+# Complete the 'alternate' function below.
+#
+# The function is expected to return an INTEGER.
+# The function accepts STRING s as parameter.
+#
 
 def checkAlternating(s):
-    if len(s) == 2:
-        if s[0] != s[-1]:
-            return True
-        return False
-    for i in range(1, len(s)-1):
-        if s[i-1] == s[i] or s[i] == s[i+1]:
+    for i in range(len(s)-1):
+        if s[i] == s[i+1]:
             return False
-
     return True
-
 
 def alternate(s):
     lst = set(s)
@@ -36,8 +36,10 @@ def alternate(s):
             ans = max(ans, len(tmp))
             # print(tmp, combi)
     return ans
-
-
+    
+    
+    
+    
 if __name__ == '__main__':
     fptr = open(os.environ['OUTPUT_PATH'], 'w')
 
