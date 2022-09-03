@@ -98,7 +98,7 @@ int solve()
         for (int j = 0; j < SIZE;j++){
             eraseNum(call[i][j]);
             cnt++;
-            if (cnt > 5 && findBingo())
+            if (cnt >= 15 && findBingo())
                 return cnt;
         }
     }
