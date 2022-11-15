@@ -6,22 +6,32 @@ N = int(input())
 graph = [list(map(int, input().split())) for _ in range(N)]
 visited = [False for _ in range(N)]
 tmp = []
-ent = set()
+ans = 100000000
+
+def find():
+    global ans
+    start, link = 0, 0
+    for i in range(N):
+        for j in range(N):
+            if visited[i] and visited[j]:
+                start += graph[i][j]
+            elif not visited[i] and not visited[j]:
+                link += graph[i][j]
+    ans = min(ans, abs(start-link))
+    return
 
 def dfs(depth):
-    if 1 <= depth and depth < N:
-
-        print(t1, t2)
+    if depth == N:
+        find()
         return
     
-    
-    for i in range(N):
-        if not visited[i]:
-            visited[i] = True
-            tmp.append(i)
-            dfs(depth+1)
-            tmp.pop()
-            visited[i] = False
 
+    visited[depth] = True
+    dfs(depth+1)
+    visited[depth] = False
+    dfs(depth+1)
 
 dfs(0)
+
+
+print(ans)
