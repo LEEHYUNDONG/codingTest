@@ -1,4 +1,5 @@
 import sys
+from collections import deque
 
 input = sys.stdin.readline
 
@@ -11,22 +12,22 @@ for _ in range(N-1):
     graph[a].append((b, c))
     graph[b].append((a, c))
 
-def init():
-    visited = [False for _ in range(N)]
-
-    return visited
-
-def dfs(a, b, dist):
-    if a == b:
-        ans = dist
-        return
-    for i in graph[a]:
-        if not visited[i[0]]:
-            dfs(i, b, dist+i[-1])
 
 for _ in range(M):
     a, b = map(int, input().split())
     ans = 0
-    visited = init()
-    print(ans)
+    def bfs(start, end):
+        q = deque()
+        q.append(start)
+        visit = [-1] * (N + 1)
+        visit[start] = 0
+        while q:
+            cur = q.popleft()
+            if cur == end: break
+            for adj_node, adj_dist in graph[cur]:
+                if visit[adj_node] > -1: continue
+                visit[adj_node] = visit[cur] + adj_dist
+                q.append(adj_node)
+        return visit[end]
+    print(bfs(a, b))
 
