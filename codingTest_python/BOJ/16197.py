@@ -13,3 +13,7 @@ def bfs(x, y):
     q = deque([])
     q.append(())
     
+    while q:
+        x, y, dist = q.popleft()
+        
+
