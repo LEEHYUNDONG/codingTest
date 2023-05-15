@@ -1,5 +1,2 @@
-4
-# abcddadca
-# aabcbcaa
-# ababbabaa
-# abca
+import sys
+input = sys.stdin.readline
