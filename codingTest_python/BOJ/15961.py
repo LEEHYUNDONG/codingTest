@@ -1,5 +1,5 @@
 import sys
-from collections import deque
+from collections import defaultdict
 input = sys.stdin.readline
 
 
@@ -8,7 +8,7 @@ arr = [int(input()) for _ in range(n)]
 
 left = 0
 right = 0
-dict = {}
+dict = defaultdict(int)
 result = 0
 
 while right < k:
@@ -17,10 +17,8 @@ while right < k:
     dict[arr[right]] += 1
     right += 1
 
-if c not in dict.keys():
-    dict[c] = 1
-else:
-    dict[c] += 1
+
+dict[c] += 1
 
 
 while left < n:
@@ -28,10 +26,7 @@ while left < n:
     dict[arr[left]] -= 1
     if dict[arr[left]] == 0:
         del dict[arr[left]]
-    if arr[right % n] not in dict.keys():
-        dict[arr[right % n]] = 1
-    else:
-        dict[arr[right % n]] += 1
+    dict[arr[right % n]] += 1
     left += 1
     right += 1
 
